@@ -1,103 +1,251 @@
-import Image from "next/image";
+"use client";
+import { motion } from "framer-motion";
+import Footer from "./components/Footer";
+import Navbar from "./components/Navbar";
 
 export default function Home() {
-  return (
-    <div className="font-sans grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="font-mono list-inside list-decimal text-sm/6 text-center sm:text-left">
-          <li className="mb-2 tracking-[-.01em]">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] font-mono font-semibold px-1 py-0.5 rounded">
-              src/app/page.tsx
-            </code>
-            .
-          </li>
-          <li className="tracking-[-.01em]">
-            Save and see your changes instantly.
-          </li>
-        </ol>
+  const categories = [
+    { name: "AI Tools", icon: "/aitool.svg" },
+    { name: "Smartphones", icon: "/Smartphone.svg" },
+    { name: "Laptops", icon: "/Laptop.svg" },
+    { name: "Headphones", icon: "/Headphone.svg" },
+    { name: "Smartwatches", icon: "/Smartwatches.svg" },
+    { name: "Productivity Tools", icon: "/ProTools.svg" },
+  ];
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
+  const featured = [
+    {
+      title: "Comparison Table",
+      description: "Interactive tables to compare products side by side.",
+      image: "https://images.unsplash.com/photo-1555066931-4365d14bab8c",
+      link: "https://21st.dev/components/comparison-table",
+    },
+    {
+      title: "Price Tracker",
+      description: "Stay updated with the latest price drops and offers.",
+      image: "https://images.pexels.com/photos/1111319/pexels-photo-1111319.jpeg",
+      link: "https://21st.dev/components/price-tracker",
+    },
+    {
+      title: "AI Recommendations",
+      description: "Get personalized product suggestions powered by AI.",
+      image: "https://images.pexels.com/photos/8386440/pexels-photo-8386440.jpeg",
+      link: "https://21st.dev/components/ai-recommendations",
+    },
+  ];
+
+  return (
+    <div
+      className="relative min-h-screen bg-black overflow-hidden"
+      style={{
+        backgroundImage: `
+          linear-gradient(90deg, rgba(255,255,255,0.07) 1px, transparent 1px),
+          linear-gradient(rgba(255,255,255,0.07) 1px, transparent 1px)
+        `,
+        backgroundSize: "40px 40px",
+      }}
+    >
+      {/* Dynamic Spotlight Blobs */}
+      <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
+        {/* Left-to-right blob */}
+        <motion.svg
+          className="absolute blur-3xl"
+          viewBox="0 0 200 200"
+          xmlns="http://www.w3.org/2000/svg"
+          style={{
+            width: 900,
+            height: 900,
+            top: "-20%",
+            left: "-30%",
+            opacity: 0.35,
+          }}
+          animate={{
+            x: ["-40%", "0%", "-20%"],
+            scale: [1, 1.2, 1],
+            rotate: [0, 15, -10, 0],
+          }}
+          transition={{
+            duration: 18,
+            repeat: Infinity,
+            repeatType: "mirror",
+            ease: "easeInOut",
+          }}
+        >
+          <path
+            fill="#6366F1"
+            d="M45.4,-52.6C59.1,-43.2,72.3,-29.8,75.9,-13.6C79.4,2.5,73.4,21.4,61.1,34.7C48.7,48,29.9,55.7,10.6,62.3C-8.7,68.9,-27.5,74.3,-40.9,66.6C-54.4,58.9,-62.5,38.2,-67.5,16.4C-72.5,-5.4,-74.5,-28.2,-63.5,-43.8C-52.5,-59.4,-28.5,-67.8,-6.6,-63.7C15.3,-59.5,30.6,-43.9,45.4,-52.6Z"
+            transform="translate(100 100)"
+          />
+        </motion.svg>
+
+        {/* Right-to-left blob */}
+        <motion.svg
+          className="absolute blur-3xl"
+          viewBox="0 0 200 200"
+          xmlns="http://www.w3.org/2000/svg"
+          style={{
+            width: 900,
+            height: 900,
+            top: "-20%",
+            right: "-30%",
+            opacity: 0.35,
+          }}
+          animate={{
+            x: ["40%", "0%", "20%"],
+            scale: [1, 1.15, 1],
+            rotate: [0, -10, 10, 0],
+          }}
+          transition={{
+            duration: 20,
+            repeat: Infinity,
+            repeatType: "mirror",
+            ease: "easeInOut",
+          }}
+        >
+          <path
+            fill="#22D3EE"
+            d="M45.4,-52.6C59.1,-43.2,72.3,-29.8,75.9,-13.6C79.4,2.5,73.4,21.4,61.1,34.7C48.7,48,29.9,55.7,10.6,62.3C-8.7,68.9,-27.5,74.3,-40.9,66.6C-54.4,58.9,-62.5,38.2,-67.5,16.4C-72.5,-5.4,-74.5,-28.2,-63.5,-43.8C-52.5,-59.4,-28.5,-67.8,-6.6,-63.7C15.3,-59.5,30.6,-43.9,45.4,-52.6Z"
+            transform="translate(100 100)"
+          />
+        </motion.svg>
+      </div>
+
+      {/* Sidebar */}
+      <Navbar />
+
+      {/* Main content */}
+      <div className="ml-64 relative z-10 text-white">
+        {/* Hero Section */}
+        <motion.main
+          initial={{ opacity: 0, y: 40 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, ease: "easeOut" }}
+          className="flex flex-col items-center justify-center text-center px-4 py-20"
+        >
+          <h1 className="text-4xl md:text-5xl font-bold mb-4">
+            Find Your Perfect Product
+          </h1>
+          <p className="text-gray-400 text-lg mb-8 max-w-xl">
+            Compare products instantly and make informed decisions
+            <br />
+            with our intelligent comparison platform
+          </p>
+
+          <div className="w-full max-w-lg">
+            <input
+              type="text"
+              placeholder="Search for products, compare instantly..."
+              className="w-full px-4 py-3 rounded-md border border-gray-700 focus:outline-none mb-4 bg-black text-white placeholder-gray-400"
             />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
-        </div>
-      </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
+            <button className="w-full bg-white text-black py-3 rounded-md font-medium">
+              Find My Best Option
+            </button>
+          </div>
+        </motion.main>
+
+        {/* Popular Categories */}
+        <section className="py-16 mx-6">
+          <div className="max-w-6xl mx-auto px-6 text-center">
+            <motion.h2
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6 }}
+              className="text-3xl font-bold mb-2"
+            >
+              Popular Categories
+            </motion.h2>
+            <motion.p
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.8, delay: 0.2 }}
+              className="text-gray-400 mb-12"
+            >
+              Explore our most searched product categories and find exactly what
+              you're looking for
+            </motion.p>
+
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+              {categories.map((cat, i) => (
+                <motion.div
+                  key={cat.name}
+                  initial={{ opacity: 0, y: 30 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.6, delay: i * 0.1 }}
+                  className="rounded-xl shadow-sm p-8 border hover:shadow-md transition bg-black/50"
+                >
+                  <img
+                    src={cat.icon}
+                    alt={cat.name}
+                    className="w-12 h-12 mx-auto mb-4"
+                  />
+                  <h3 className="text-lg font-semibold mb-4">{cat.name}</h3>
+                  <button className="w-full border rounded-md py-2 text-gray-300 hover:bg-gray-800 transition">
+                    View
+                  </button>
+                </motion.div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* Featured Components */}
+        <section className="py-16">
+          <div className="max-w-6xl mx-auto px-6 text-center">
+            <motion.h2
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6 }}
+              className="text-3xl font-bold mb-2"
+            >
+              Featured Components
+            </motion.h2>
+            <motion.p
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.8, delay: 0.2 }}
+              className="text-gray-400 mb-12"
+            >
+              Use our ready-made components to explore, compare, and analyze
+              products effectively
+            </motion.p>
+
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+              {featured.map((item, i) => (
+                <motion.a
+                  key={item.title}
+                  href={item.link}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  initial={{ opacity: 0, y: 30 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.7, delay: i * 0.15 }}
+                  className="rounded-xl border shadow-sm overflow-hidden hover:shadow-md hover:-translate-y-1 transition cursor-pointer block bg-black/50"
+                >
+                  <img
+                    src={item.image}
+                    alt={item.title}
+                    className="w-full h-48 object-cover"
+                  />
+                  <div className="p-6 text-left">
+                    <h3 className="text-lg font-semibold">{item.title}</h3>
+                    <p className="text-gray-400 text-sm mt-2">
+                      {item.description}
+                    </p>
+                  </div>
+                </motion.a>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        <Footer />
+      </div>
     </div>
   );
 }
