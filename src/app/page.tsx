@@ -1,251 +1,207 @@
 "use client";
-import { motion } from "framer-motion";
-import Footer from "./components/Footer";
-import Navbar from "./components/Navbar";
+import React from "react";
+import Nav1 from "@/app/components/Nav1";
+import Fot1 from "./components/Fot1";
 
-export default function Home() {
-  const categories = [
-    { name: "AI Tools", icon: "/aitool.svg" },
-    { name: "Smartphones", icon: "/Smartphone.svg" },
-    { name: "Laptops", icon: "/Laptop.svg" },
-    { name: "Headphones", icon: "/Headphone.svg" },
-    { name: "Smartwatches", icon: "/Smartwatches.svg" },
-    { name: "Productivity Tools", icon: "/ProTools.svg" },
-  ];
+const categories = [
+  { title: "AI", subtitle: "Tools", link: "https://images.unsplash.com/photo-1677442136019-21780ecad995?q=80&w=1632&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" },
+  { title: "Animations", subtitle: " ", link: "https://images.unsplash.com/photo-1603184017968-953f59cd2e37?q=80&w=1471&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" },
+  { title: "Features", subtitle: " ", link: "https://images.unsplash.com/photo-1661169399024-1c239e542463?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" },
+  { title: "Buttons", subtitle: " ", link: "https://images.unsplash.com/photo-1491927570842-0261e477d937?q=80&w=687&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" },
+  { title: "Productivity", subtitle: "Tools", link: "https://images.unsplash.com/photo-1507099985932-87a4520ed1d5?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" },
+];
 
-  const featured = [
-    {
-      title: "Comparison Table",
-      description: "Interactive tables to compare products side by side.",
-      image: "https://images.unsplash.com/photo-1555066931-4365d14bab8c",
-      link: "https://21st.dev/components/comparison-table",
-    },
-    {
-      title: "Price Tracker",
-      description: "Stay updated with the latest price drops and offers.",
-      image: "https://images.pexels.com/photos/1111319/pexels-photo-1111319.jpeg",
-      link: "https://21st.dev/components/price-tracker",
-    },
-    {
-      title: "AI Recommendations",
-      description: "Get personalized product suggestions powered by AI.",
-      image: "https://images.pexels.com/photos/8386440/pexels-photo-8386440.jpeg",
-      link: "https://21st.dev/components/ai-recommendations",
-    },
-  ];
-
+export default function EducationPage() {
   return (
-    <div
-      className="relative min-h-screen bg-black overflow-hidden"
-      style={{
-        backgroundImage: `
-          linear-gradient(90deg, rgba(255,255,255,0.07) 1px, transparent 1px),
-          linear-gradient(rgba(255,255,255,0.07) 1px, transparent 1px)
-        `,
-        backgroundSize: "40px 40px",
-      }}
-    >
-      {/* Dynamic Spotlight Blobs */}
-      <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
-        {/* Left-to-right blob */}
-        <motion.svg
-          className="absolute blur-3xl"
-          viewBox="0 0 200 200"
-          xmlns="http://www.w3.org/2000/svg"
-          style={{
-            width: 900,
-            height: 900,
-            top: "-20%",
-            left: "-30%",
-            opacity: 0.35,
-          }}
-          animate={{
-            x: ["-40%", "0%", "-20%"],
-            scale: [1, 1.2, 1],
-            rotate: [0, 15, -10, 0],
-          }}
-          transition={{
-            duration: 18,
-            repeat: Infinity,
-            repeatType: "mirror",
-            ease: "easeInOut",
-          }}
-        >
-          <path
-            fill="#6366F1"
-            d="M45.4,-52.6C59.1,-43.2,72.3,-29.8,75.9,-13.6C79.4,2.5,73.4,21.4,61.1,34.7C48.7,48,29.9,55.7,10.6,62.3C-8.7,68.9,-27.5,74.3,-40.9,66.6C-54.4,58.9,-62.5,38.2,-67.5,16.4C-72.5,-5.4,-74.5,-28.2,-63.5,-43.8C-52.5,-59.4,-28.5,-67.8,-6.6,-63.7C15.3,-59.5,30.6,-43.9,45.4,-52.6Z"
-            transform="translate(100 100)"
-          />
-        </motion.svg>
+    <div className="bg-white">
+    <div className="relative min-h-screen overflow-hidden flex flex-col">
+      {/* Background video */}
+      <video
+        autoPlay
+        loop
+        muted
+        playsInline
+        className="absolute inset-0 w-full h-full object-cover"
+      >
+        <source src="/education-bg.mp4" type="video/mp4" />
+      </video>
 
-        {/* Right-to-left blob */}
-        <motion.svg
-          className="absolute blur-3xl"
-          viewBox="0 0 200 200"
-          xmlns="http://www.w3.org/2000/svg"
-          style={{
-            width: 900,
-            height: 900,
-            top: "-20%",
-            right: "-30%",
-            opacity: 0.35,
-          }}
-          animate={{
-            x: ["40%", "0%", "20%"],
-            scale: [1, 1.15, 1],
-            rotate: [0, -10, 10, 0],
-          }}
-          transition={{
-            duration: 20,
-            repeat: Infinity,
-            repeatType: "mirror",
-            ease: "easeInOut",
-          }}
-        >
-          <path
-            fill="#22D3EE"
-            d="M45.4,-52.6C59.1,-43.2,72.3,-29.8,75.9,-13.6C79.4,2.5,73.4,21.4,61.1,34.7C48.7,48,29.9,55.7,10.6,62.3C-8.7,68.9,-27.5,74.3,-40.9,66.6C-54.4,58.9,-62.5,38.2,-67.5,16.4C-72.5,-5.4,-74.5,-28.2,-63.5,-43.8C-52.5,-59.4,-28.5,-67.8,-6.6,-63.7C15.3,-59.5,30.6,-43.9,45.4,-52.6Z"
-            transform="translate(100 100)"
-          />
-        </motion.svg>
-      </div>
+      {/* Navbar */}
+      <Nav1 />
 
-      {/* Sidebar */}
-      <Navbar />
+      {/* Hero section */}
+      <main className="relative z-10 flex flex-col items-center justify-center flex-1 text-center px-6">
 
-      {/* Main content */}
-      <div className="ml-64 relative z-10 text-white">
-        {/* Hero Section */}
-        <motion.main
-          initial={{ opacity: 0, y: 40 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, ease: "easeOut" }}
-          className="flex flex-col items-center justify-center text-center px-4 py-20"
+        <h1 className="text-4xl md:text-6xl font-bold leading-snug text-[#0d091f] pt-48">
+          Unifying Tech <br />
+          <span className="text-[#6438d6]">Simplifying choices</span>
+        </h1>
+
+        <p className="mt-4 max-w-3xl text-gray-600 font-bold">
+          Unlock your potential with our all-in-one tech hub. Tailer to guide you every step of the way.
+        </p>
+
+        <div className="mt-6 flex flex-col sm:flex-row items-center gap-4">
+        <button
+          className="rounded-xl bg-[#29b797] text-white font-bold"
+          style={{ height: "62px", padding: "0 24px" }}
         >
-          <h1 className="text-4xl md:text-5xl font-bold mb-4">
-            Find Your Perfect Product
-          </h1>
-          <p className="text-gray-400 text-lg mb-8 max-w-xl">
-            Compare products instantly and make informed decisions
-            <br />
-            with our intelligent comparison platform
+            Explore now
+          </button>
+        </div>
+      </main>
+    </div>
+      <div className="relative z-10 flex flex-col items-center justify-center flex-1 text-center bg-[#0d091f]">
+          {/* New Explore Tech Mastery Section */}
+        <section className="relative z-10 bg-gray-50 py-16 w-full flex flex-col items-center">
+          <h2 className="text-4xl md:text-6xl font-bold text-center text-black">
+            Explore <span className="text-[#6438d6]">Tech Mastery</span>
+          </h2>
+          <p className="mt-4 max-w-3xl text-center text-gray-700">
+            Dive into our extensive library of tech insights. Use the search bar below to find specific tools or browse curated categories to discover the best solutions for your needs.
           </p>
 
-          <div className="w-full max-w-lg">
+          {/* Search bar */}
+          <div className="mt-6 w-full max-w-2xl">
             <input
               type="text"
-              placeholder="Search for products, compare instantly..."
-              className="w-full px-4 py-3 rounded-md border border-gray-700 focus:outline-none mb-4 bg-black text-white placeholder-gray-400"
+              placeholder="Search"
+              className="w-full rounded-xl border border-gray-300 px-4 py-3 text-gray-700 focus:outline-none focus:ring-2 focus:ring-purple-500"
             />
-            <button className="w-full bg-white text-black py-3 rounded-md font-medium">
-              Find My Best Option
-            </button>
           </div>
-        </motion.main>
 
-        {/* Popular Categories */}
-        <section className="py-16 mx-6">
-          <div className="max-w-6xl mx-auto px-6 text-center">
-            <motion.h2
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6 }}
-              className="text-3xl font-bold mb-2"
-            >
-              Popular Categories
-            </motion.h2>
-            <motion.p
-              initial={{ opacity: 0 }}
-              whileInView={{ opacity: 1 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.8, delay: 0.2 }}
-              className="text-gray-400 mb-12"
-            >
-              Explore our most searched product categories and find exactly what
-              you're looking for
-            </motion.p>
-
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-              {categories.map((cat, i) => (
-                <motion.div
-                  key={cat.name}
-                  initial={{ opacity: 0, y: 30 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.6, delay: i * 0.1 }}
-                  className="rounded-xl shadow-sm p-8 border hover:shadow-md transition bg-black/50"
-                >
-                  <img
-                    src={cat.icon}
-                    alt={cat.name}
-                    className="w-12 h-12 mx-auto mb-4"
-                  />
-                  <h3 className="text-lg font-semibold mb-4">{cat.name}</h3>
-                  <button className="w-full border rounded-md py-2 text-gray-300 hover:bg-gray-800 transition">
-                    View
-                  </button>
-                </motion.div>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        {/* Featured Components */}
-        <section className="py-16">
-          <div className="max-w-6xl mx-auto px-6 text-center">
-            <motion.h2
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6 }}
-              className="text-3xl font-bold mb-2"
-            >
-              Featured Components
-            </motion.h2>
-            <motion.p
-              initial={{ opacity: 0 }}
-              whileInView={{ opacity: 1 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.8, delay: 0.2 }}
-              className="text-gray-400 mb-12"
-            >
-              Use our ready-made components to explore, compare, and analyze
-              products effectively
-            </motion.p>
-
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-              {featured.map((item, i) => (
-                <motion.a
-                  key={item.title}
-                  href={item.link}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  initial={{ opacity: 0, y: 30 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.7, delay: i * 0.15 }}
-                  className="rounded-xl border shadow-sm overflow-hidden hover:shadow-md hover:-translate-y-1 transition cursor-pointer block bg-black/50"
-                >
-                  <img
-                    src={item.image}
-                    alt={item.title}
-                    className="w-full h-48 object-cover"
-                  />
-                  <div className="p-6 text-left">
-                    <h3 className="text-lg font-semibold">{item.title}</h3>
-                    <p className="text-gray-400 text-sm mt-2">
-                      {item.description}
-                    </p>
+          {/* Category cards */}
+          <div className="mt-12 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl w-full justify-center items-center">
+            {categories.map((cat, idx) => (
+              <div
+                key={idx}
+                className="bg-white rounded-xl shadow flex flex-col justify-between border-2 border-transparent hover:border-[#6438d6] transition"
+              >
+                <div className="mb-2">
+                  {/* Image from the link */}
+                  <div className="h-36 w-full bg-gradient-to-b from-purple-100 to-purple-50 rounded-md mb-2 flex items-center justify-center">
+                    <img
+                      src={cat.link} // Use the link provided in the categories array
+                      alt={cat.title}
+                      className="object-cover w-full h-full rounded-xl"
+                    />
                   </div>
-                </motion.a>
-              ))}
-            </div>
+                  <h3 className="text-lg text-black font-semibold">{cat.title}</h3>
+                  <p className="text-[#6438d6] font-bold">{cat.subtitle}</p>
+                </div>
+                <div className="flex justify-end">
+                  <button className="text-gray-500 hover:text-[#6438d6] font-bold">
+                  </button>
+                </div>
+              </div>
+            ))}
           </div>
         </section>
-
-        <Footer />
       </div>
+      <div>
+        {/* Third Section: Knowledge Hub */}
+        <section className="relative z-10 bg-gray-50 py-15 w-full flex flex-col items-center">
+
+          {/* Heading */}
+          <h2 className="text-4xl md:text-6xl font-bold text-center leading-snug text-black">
+            The Power to Choose, <br />
+            <span className="text-[#6438d6]">All in one Place</span>
+          </h2>
+
+          {/* Articles grid */}
+          <div className="mt-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl w-full">
+            {/* Card 1 */}
+            <div className="bg-white rounded-2xl p-6 shadow border-2 border-transparent hover:border-[#6438d6] transition-transform duration-300 ease-in-out transform hover:scale-105 hover:shadow-xl overflow-hidden">
+              <img
+                src="https://images.unsplash.com/photo-1555066931-4365d14bab8c"
+                alt="Comparison Table"
+                className="w-full h-32 object-cover rounded-xl"
+              />
+              <div className="p-6 text-left">
+                <h3 className="text-lg font-semibold text-gray-900">
+                  AI in Product Comparisons
+                </h3>
+                <div className="mt-4 flex items-center justify-between">
+                  <p className="text-sm text-gray-500">November 9, 2024</p>
+                  <button className="px-4 py-2 rounded-xl border border-[#6438d6] text-black font-semibold hover:bg-[#f1f0fd] hover:text-black transition">
+                    Read more
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            {/* Card 2 */}
+            <div className="bg-white rounded-2xl p-6 shadow border-2 border-transparent hover:border-[#6438d6] transition-transform duration-300 ease-in-out transform hover:scale-105 hover:shadow-xl overflow-hidden">
+              <img
+                src="https://images.unsplash.com/photo-1559526324-593bc073d938?q=80&w=1470&auto=format&fit=crop"
+                alt="Fibonacci Extensions"
+                className="w-full h-32 object-cover rounded-xl"
+              />
+              <div className="p-6 text-left">
+                <h3 className="text-lg font-semibold text-gray-900">
+                  Why is comparing necessary
+                </h3>
+                <div className="mt-4 flex items-center justify-between">
+                <p className="text-sm text-gray-500">October 31, 2024</p>
+                <button className="px-4 py-2 rounded-xl border border-[#6438d6] text-black font-semibold hover:bg-[#f1f0fd] hover:text-black transition">
+                  Read more
+                </button>
+              </div>
+              </div>
+            </div>
+
+            {/* Card 3 */}
+            <div className="bg-white rounded-2xl p-6 shadow border-2 border-transparent hover:border-[#6438d6] transition-transform duration-300 ease-in-out transform hover:scale-105 hover:shadow-xl overflow-hidden">
+            <img
+              src="https://images.pexels.com/photos/8386440/pexels-photo-8386440.jpeg"
+              alt="Bull Pennant Patterns"
+              className="w-full h-32 object-cover rounded-xl"
+            />
+            <div className="p-6 text-left">
+              <h3 className="text-lg font-semibold text-gray-900 mt-1">
+                The Psychology of Decision-Making
+              </h3>
+              <div className="mt-4 flex items-center justify-between">
+                <p className="text-sm text-gray-500">August 14, 2024</p>
+                <button className="px-4 py-2 rounded-xl border border-[#6438d6] text-black font-semibold hover:bg-[#f1f0fd] hover:text-black transition">
+                  Read more
+                </button>
+              </div>
+            </div>
+          </div>
+          </div>
+        </section>
+      </div>
+      <div>
+        {/* Call-to-Action Section with Side Images */}
+        <section className="relative w-full h-[400px] bg-gray-50 flex items-center justify-center text-center overflow-hidden px-6">
+          {/* Left Image */}
+          <div className="absolute left-5 md:left-50 bottom-0 h-full flex items-end">
+            <img
+              src="https://alchemymarkets.com/wp-content/themes/bathe-main/assets/images/right_footer_image.png"
+              alt="Left Side Graphic"
+              className="h-72 md:h-80 object-contain"
+            />
+          </div>
+
+          {/* Right Image */}
+          <div className="absolute right-5 md:right-50 bottom-0 h-full flex items-end">
+            <img
+              src="https://alchemymarkets.com/wp-content/themes/bathe-main/assets/images/left_footer_image.png"
+              alt="Right Side Graphic"
+              className="h-72 md:h-80 object-contain"
+            />
+          </div>
+
+          {/* Text Content */}
+          <div className="relative z-10 max-w-3xl mx-auto">
+            <h1 className="text-4xl md:text-6xl font-bold leading-snug text-[#0d091f]">
+              Discover the best <span className="text-[#6438d6]">tech</span>, today, <span>all in one place</span>
+            </h1>
+          </div>
+        </section>
+      </div>
+      <Fot1 />
     </div>
   );
 }

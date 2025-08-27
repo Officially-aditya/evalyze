@@ -1,22 +1,24 @@
 @import "tailwindcss";
 
-/* Global Dark Mode - OpenAI Style */
+/* Global Dark Mode - OpenAI Style 
 html, body {
   @apply bg-black text-neutral-200;
   font-family: 'Inter', sans-serif;
-}
+}*/
 
-/* Headings */
+/* Headings 
 h1, h2, h3, h4, h5, h6 {
   @apply text-white font-semibold;
 }
+  */
 
-/* Links */
+/* Links 
 a {
   @apply text-neutral-300 hover:text-white transition-colors;
 }
+  */
 
-/* Inputs */
+/* Inputs 
 input, textarea, select {
   @apply bg-black text-white border border-neutral-800 rounded-md px-3 py-2;
 }
@@ -24,15 +26,17 @@ input, textarea, select {
 input::placeholder, textarea::placeholder {
   @apply text-neutral-500;
 }
+  */
 
-/* Buttons */
+/* Buttons 
 button {
   @apply bg-white text-black rounded-md px-4 py-2 font-medium hover:bg-neutral-200 transition;
-}
+} */
 
-/* Cards / Containers (scoped, not global divs!) */
+/* Cards / Containers (scoped, not global divs!) 
 .container,
 .card,
 form {
   @apply bg-black text-neutral-200;
 }
+  */
