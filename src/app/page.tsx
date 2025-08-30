@@ -5,9 +5,9 @@ import Fot1 from "./components/Fot1";
 
 const categories = [
   { title: "AI", subtitle: "Tools", link: "https://images.unsplash.com/photo-1677442136019-21780ecad995?q=80&w=1632&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" },
-  { title: "Animations", subtitle: " ", link: "https://images.unsplash.com/photo-1603184017968-953f59cd2e37?q=80&w=1471&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" },
-  { title: "Features", subtitle: " ", link: "https://images.unsplash.com/photo-1661169399024-1c239e542463?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" },
-  { title: "Buttons", subtitle: " ", link: "https://images.unsplash.com/photo-1491927570842-0261e477d937?q=80&w=687&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" },
+  { title: "Animations", subtitle: " ", link: "https://images.unsplash.com/photo-1611643378160-39d6dd915b69?q=80&w=765&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" },
+  { title: "Features", subtitle: " ", link: "https://plus.unsplash.com/premium_photo-1728457508551-8973fedacaa4?q=80&w=1632&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" },
+  { title: "Buttons", subtitle: " ", link: "https://images.unsplash.com/photo-1674977126774-eee3300633ca?q=80&w=1633&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" },
   { title: "Productivity", subtitle: "Tools", link: "https://images.unsplash.com/photo-1507099985932-87a4520ed1d5?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" },
 ];
 

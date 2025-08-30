@@ -34,19 +34,19 @@ export default function LoginPage() {
       {/* Left Section */}
       <div className="absolute left-0 top-1/2 -translate-y-1/2 z-10 px-16 space-y-10 text-gray-300 w-[360px] mt-50">
         <div>
-          <p className="text-lg font-semibold">Email</p>
-          <p className="text-base">info@constellation.ai</p>
+          <p className="text-xl font-semibold">Email</p>
+          <p className="text-md">info@constellation.ai</p>
         </div>
         <div>
-          <p className="text-lg font-semibold">Location</p>
-          <p className="text-base leading-relaxed">
+          <p className="text-xl font-semibold">Location</p>
+          <p className="text-md leading-relaxed">
             45 Constellation Tower, Innovation Street, London, UK
           </p>
         </div>
         <div>
-          <p className="text-lg font-semibold">Social Media</p>
-          <p className="text-base">@constellation.ai</p>
-          <p className="text-base">constellation</p>
+          <p className="text-xl font-semibold">Social Media</p>
+          <p className="text-md">@constellation.ai</p>
+          <p className="text-md">constellation</p>
         </div>
       </div>
 
@@ -56,7 +56,7 @@ export default function LoginPage() {
       </div>
 
       {/* Actual 3D Image */}
-      <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 z-50 mt-40">
+      <div className="absolute left-7/15 top-1/2 -translate-x-1/2 -translate-y-1/2 z-50 mt-40">
         <img
           src="/3d-art.jpg"
           alt="3D Art"

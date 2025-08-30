@@ -1,10 +1,18 @@
+// layout.tsx
 import type { Metadata } from "next";
-import { Poppins } from "next/font/google";
+import { Archivo_Black, Poppins } from "next/font/google";
 import "./globals.css";
+
+const archivoBlack = Archivo_Black({
+  subsets: ["latin"],
+  weight: "400",
+  variable: "--font-archivo-black",
+  display: "swap",
+});
 
 const poppins = Poppins({
   subsets: ["latin"],
-  weight: ["300", "400", "500", "600", "700"],
+  weight: ["400", "500", "600"],
   variable: "--font-poppins",
   display: "swap",
 });
@@ -21,7 +29,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${poppins.variable} antialiased`}>
+      <body className={`${archivoBlack.variable} ${poppins.variable} antialiased`}>
         {children}
       </body>
     </html>

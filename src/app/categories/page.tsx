@@ -1,17 +1,21 @@
-// components/Page.tsx
 "use client";
 import { useState } from "react";
-import { TrendingUp } from "lucide-react";
-import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
+import Link from "next/link";
+import { Playfair_Display } from "next/font/google";
 
-const marketingBlocks = [
-  { label: "Call to action", count: 2 },
-  { label: "Borders", count: 3 },
-  { label: "Hooks", count: 4 },
-  { label: "Maps", count: 5 },
-  { label: "Heroes", count: 1 },
-];
+const playfair = Playfair_Display({
+  subsets: ["latin"],
+  weight: ["500", "600", "700"],
+});
+
+type ComponentItem = {
+  name: string;
+  site: string;
+  description: string;
+  tags: string[];
+  image: string;
+};
 
 const uiComponents = [
   "Accordions",
@@ -30,7 +34,7 @@ const uiComponents = [
   "Carousels",
 ];
 
-const componentsList = [
+const componentsList: ComponentItem[] = [
   {
     name: "Pricing Table",
     site: "21st.dev",
@@ -145,174 +149,137 @@ const componentsList = [
   },
 ];
 
-// Card UI
-function ProductCard({ name, site, description, tags, image }: any) {
-  return (
-    <motion.div
-      layout
-      initial={{ opacity: 0, y: 30 }}
-      animate={{ opacity: 1, y: 0 }}
-      exit={{ opacity: 0, y: -30 }}
-      transition={{ duration: 0.3 }}
-      className="flex flex-col rounded-xl border border-neutral-800 bg-neutral-950 p-5 hover:border-neutral-700 transition"
-    >
-      {/* Image / Logo area */}
-      <div className="w-full h-32 mb-4 relative overflow-hidden rounded-lg">
-        {image ? (
-          <Image src={image} alt={name} fill className="object-cover" />
-        ) : (
-          <div
-            className={`w-full h-full rounded bg-gradient-to-br ${
-              site === "21st.dev"
-                ? "from-blue-500/40 to-indigo-500/40"
-                : "from-pink-500/40 to-purple-500/40"
-            }`}
-          />
-        )}
-      </div>
 
-      {/* Title + site */}
-      <div className="flex items-center gap-2 mb-2">
-        <h3 className="font-medium text-white">{name}</h3>
-        <span className="text-xs rounded-full bg-neutral-900 px-2 py-0.5 text-neutral-400">
-          {site}
-        </span>
-      </div>
 
-      {/* Description */}
-      <p className="text-sm text-neutral-400 mb-4">{description}</p>
+export default function CategoriesPage() {
+  const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
 
-      {/* Tags */}
-      <div className="flex flex-wrap gap-2 mt-auto">
-        {tags.map((tag: string) => (
-          <span
-            key={tag}
-            className="inline-flex items-center rounded-full border border-neutral-700 px-2 py-0.5 text-xs text-neutral-300"
-          >
-            {tag}
-          </span>
-        ))}
-      </div>
-    </motion.div>
-  );
-}
+  // ✅ Filter components based on selected categories
+  const filteredComponents = selectedCategories.length === 0
+    ? componentsList
+    : componentsList.filter((item) =>
+        item.tags.some((tag) => selectedCategories.includes(tag))
+      );
 
-export default function Page() {
-  const [selectedFilters, setSelectedFilters] = useState<string[]>([]);
+  // ✅ Chunk into groups of 3 (was 2)
+  const chunkedComponents: ComponentItem[][] = [];
+  for (let i = 0; i < filteredComponents.length; i += 3) {
+    chunkedComponents.push(filteredComponents.slice(i, i + 3));
+  }
 
-  const toggleFilter = (filter: string) => {
-    setSelectedFilters((prev) =>
-      prev.includes(filter) ? prev.filter((f) => f !== filter) : [...prev, filter]
+  // ✅ Handle checkbox toggle
+  const toggleCategory = (category: string) => {
+    setSelectedCategories((prev) =>
+      prev.includes(category)
+        ? prev.filter((cat) => cat !== category)
+        : [...prev, category]
     );
   };
 
-  const filteredComponents = componentsList.filter((comp) => {
-    if (selectedFilters.length === 0) return true;
-    return comp.tags.some((tag) => selectedFilters.includes(tag));
-  });
-
   return (
-    <div className="flex h-screen bg-black text-white">
-      {/* Sidebar */}
-      <aside className="w-64 flex-shrink-0 border-r border-neutral-800 bg-black p-6 overflow-y-auto">
-        <h2 className="mb-4 text-lg font-semibold">Filter</h2>
-
-        {/* Marketing Blocks */}
-        <motion.div
-          initial={{ opacity: 0, x: -20 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ staggerChildren: 0.1 }}
-          className="mb-6"
-        >
-          <h3 className="mb-2 font-medium text-neutral-300">Marketing Blocks</h3>
-          <div className="space-y-2">
-            {marketingBlocks.map(({ label }) => (
-              <motion.label
-                key={label}
-                initial={{ opacity: 0, x: -10 }}
-                animate={{ opacity: 1, x: 0 }}
-                className="flex items-center gap-2 text-sm text-neutral-400 cursor-pointer"
-              >
-                <input
-                  type="checkbox"
-                  checked={selectedFilters.includes(label)}
-                  onChange={() => toggleFilter(label)}
-                  className="rounded bg-neutral-900"
-                />
-                {label}
-              </motion.label>
-            ))}
+    <div>
+      <header className="w-full px-10 py-6 bg-white shadow-sm border-b border-gray-200 cursor-pointer">
+        <Link href="/">
+          <div className="text-2xl font-bold text-gray-900">
+            Evalyze
           </div>
-        </motion.div>
+        </Link>
+      </header>
 
-        <hr className="my-4 border-neutral-800" />
-
-        {/* UI Components */}
-        <motion.div
-          initial={{ opacity: 0, x: -20 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ staggerChildren: 0.1 }}
-        >
-          <h3 className="mb-2 font-medium text-neutral-300">UI Components</h3>
-          <div className="space-y-2">
-            {uiComponents.map((item) => (
-              <motion.label
-                key={item}
-                initial={{ opacity: 0, x: -10 }}
-                animate={{ opacity: 1, x: 0 }}
-                className="flex items-center gap-2 text-sm text-neutral-400 cursor-pointer"
-              >
-                <input
-                  type="checkbox"
-                  checked={selectedFilters.includes(item)}
-                  onChange={() => toggleFilter(item)}
-                  className="rounded bg-neutral-900"
-                />
-                {item}
-              </motion.label>
-            ))}
+      <div className="min-h-screen bg-white flex">
+        {/* Sidebar */}
+        <aside className="w-74 top-40 h-fit self-start p-4">
+          <div className="bg-white shadow border border-gray-200 rounded-3xl p-6">
+            <h2 className="text-lg font-semibold mb-4 text-gray-800">Filter Components</h2>
+            <SidebarCheckboxes
+              selectedCategories={selectedCategories}
+              toggleCategory={toggleCategory}
+            />
           </div>
-        </motion.div>
-      </aside>
+        </aside>
 
-      {/* Main Content */}
-      <main className="flex-1 overflow-y-auto p-8">
-        {/* Breadcrumb */}
-        <div className="mb-6 text-sm text-neutral-500">
-          Home <span className="mx-2">{">"}</span>
-          <span className="font-medium text-neutral-300">Components</span>
+        {/* Main content */}
+         <div className="flex-1">
+          <h1 className={`text-6xl font-bold text-gray-800 text-center pt-20 pb-10 ${playfair.className}`}>
+            Categories
+          </h1>
+
+          <main className="flex flex-col gap-8 px-10 pb-20 max-w-6xl mx-auto">
+            {chunkedComponents.length > 0 ? (
+              chunkedComponents.map((chunk, rowIndex) => (
+                  <Row key={rowIndex} chunk={chunk} />
+              ))
+            ) : (
+              <p className="text-center text-gray-500">No components match your filters.</p>
+            )}
+          </main>
         </div>
-
-        {/* Title */}
-        <h1 className="mb-1 text-2xl font-semibold">Component Explorer</h1>
-        <p className="mb-6 text-sm text-neutral-500">
-          Browse components from <b>21st.dev</b> and <b>reactbits.dev</b>
-        </p>
-
-        {/* Search / Filter Row */}
-        <div className="mb-6 flex items-center justify-between rounded-lg border border-neutral-800 bg-neutral-900 px-4 py-3">
-          <div className="flex items-center gap-2 text-sm text-neutral-400">
-            <TrendingUp className="h-4 w-4" />
-            Showing {filteredComponents.length} results
-          </div>
-          <div className="flex items-center gap-2 text-sm text-neutral-400">
-            <TrendingUp className="h-4 w-4" />
-            Best Match
-          </div>
-        </div>
-
-        {/* Grid */}
-        <motion.div
-          layout
-          className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3"
-        >
-          <AnimatePresence>
-            {filteredComponents.map((comp, i) => (
-              <ProductCard key={i} {...comp} />
-            ))}
-          </AnimatePresence>
-        </motion.div>
-      </main>
+      </div>
     </div>
   );
 }
+
+// ✅ Sidebar Checkbox List (with props)
+function SidebarCheckboxes({
+  selectedCategories,
+  toggleCategory,
+}: {
+  selectedCategories: string[];
+  toggleCategory: (category: string) => void;
+}) {
+  return (
+    <div className="space-y-5 max-h-[70vh] mt-5 overflow-y-auto pr-1 mr-1">
+      {uiComponents.map((component) => (
+        <label
+          key={component}
+          className="flex items-center space-x-2 text-gray-700 text-sm cursor-pointer hover:text-black"
+        >
+          <input
+            type="checkbox"
+            className="accent-black w-4 h-4"
+            checked={selectedCategories.includes(component)}
+            onChange={() => toggleCategory(component)}
+          />
+          <span>{component}</span>
+        </label>
+      ))}
+    </div>
+  );
+}
+
+function Row({ chunk }: { chunk: ComponentItem[] }) {
+  return (
+    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+      {chunk.map((item) => (
+        <Card key={item.name} item={item} />
+      ))}
+    </div>
+  );
+}
+
+
+function Card({ item }: { item: ComponentItem }) {
+  return (
+    <div className="relative group rounded-3xl overflow-hidden border border-gray-200 shadow hover:shadow-lg transition-shadow duration-300">
+      <Image
+        src={item.image}
+        alt={item.name}
+        width={500}
+        height={300}
+        className="w-full h-64 object-cover transform transition-transform duration-300 group-hover:scale-105"
+
+      />
+
+      {/* Overlay on hover */}
+      <div className="absolute inset-0 bg-black/50 backdrop-blur-sm flex flex-col justify-center items-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 text-white p-6">
+        <h2 className="text-lg font-semibold mb-1 text-center">{item.name}</h2>
+        <p className="text-sm italic text-gray-200 mb-1">{item.site}</p>
+        <p className="text-sm text-center text-gray-300 mb-4">{item.description}</p>
+        <button className="px-4 py-2 rounded-lg bg-white text-black hover:bg-gray-200 text-sm">
+          Explore →
+        </button>
+      </div>
+    </div>
+  );
+}
+

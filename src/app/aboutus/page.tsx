@@ -1,19 +1,30 @@
 "use client";
 
-import Navbar from "../components/Navbar";
-import PageWrapper from "../components/PageWrapper";
+import Nav1 from "../components/Nav1";
 import PageSection from "../components/PageSection";
 import { motion } from "framer-motion";
 
 export default function AboutUs() {
   return (
-    <div className="flex">
-      {/* Sidebar */}
-      <Navbar />
+    <div className="relative min-h-screen overflow-hidden flex flex-col">
+      {/* Background Video */}
+      <video
+        autoPlay
+        loop
+        muted
+        playsInline
+        className="absolute inset-0 w-full h-full object-contain
+"
+      >
+        <source src="/education-bg.mp4" type="video/mp4" />
+      </video>
 
-      {/* Main Content (shifted right) */}
-      <div className="ml-64 flex-1 bg-black">
-        <PageWrapper>
+      {/* Foreground Content */}
+      <div className="relative z-10">
+        {/* Top Nav */}
+        <Nav1 />
+
+        <div className="flex-1 bg-transparent text-black">
           {/* Hero Section */}
           <motion.div
             initial={{ opacity: 0, y: 30 }}
@@ -35,8 +46,8 @@ export default function AboutUs() {
             transition={{ duration: 0.6, delay: 0.2 }}
             viewport={{ once: true }}
           >
-            <h2 className="text-2xl font-semibold mb-4">Our Story</h2>
-            <p className="text-gray-400 leading-relaxed">
+            <h2 className="text-2xl font-semibold mb-4 text-[#6438d6]">Our Story</h2>
+            <p className="text-gray-700 leading-relaxed">
               Evalyze was founded with one belief — choosing the right product
               should be effortless, not overwhelming. With endless options
               available, people often struggle to compare features, prices, and
@@ -49,32 +60,34 @@ export default function AboutUs() {
 
           {/* Mission + Vision */}
           <motion.section
-            className="py-16 bg-neutral-900 rounded-2xl max-w-5xl mx-auto px-8 text-center shadow-lg"
+            className="py-16 bg-white rounded-2xl max-w-5xl mx-auto px-8 text-center shadow-lg"
             initial={{ opacity: 0, y: 40 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.3 }}
             viewport={{ once: true }}
           >
-            <h2 className="text-2xl font-semibold mb-6">Our Mission & Vision</h2>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 text-gray-300">
+            <h2 className="text-2xl font-semibold mb-6 text-[#6438d6]">
+              Our Mission & Vision
+            </h2>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 text-gray-700">
               <motion.div
-                className="p-6 border rounded-xl hover:border-gray-600 transition"
+                className="p-6 border border-gray-200 rounded-xl hover:border-gray-400 transition bg-white"
                 whileHover={{ scale: 1.03 }}
               >
-                <h3 className="font-bold text-lg mb-2">Mission</h3>
+                <h3 className="font-bold text-lg mb-2 text-black">Mission</h3>
                 <p>
                   To simplify decision-making for users worldwide by delivering
                   intelligent, accurate, and transparent product comparisons.
                 </p>
               </motion.div>
               <motion.div
-                className="p-6 border rounded-xl hover:border-gray-600 transition"
+                className="p-6 border border-gray-200 rounded-xl hover:border-gray-400 transition bg-white"
                 whileHover={{ scale: 1.03 }}
               >
-                <h3 className="font-bold text-lg mb-2">Vision</h3>
+                <h3 className="font-bold text-lg mb-2 text-black">Vision</h3>
                 <p>
-                  To become the go-to platform where anyone can discover,
-                  evaluate, and confidently choose the best products in seconds.
+                  To become the go-to platform where anyone can discover, evaluate,
+                  and confidently choose the best products in seconds.
                 </p>
               </motion.div>
             </div>
@@ -88,7 +101,9 @@ export default function AboutUs() {
             transition={{ duration: 0.6, delay: 0.4 }}
             viewport={{ once: true }}
           >
-            <h2 className="text-2xl font-semibold mb-10">Our Core Values</h2>
+            <h2 className="text-2xl font-semibold mb-10 text-[#6438d6]">
+              Our Core Values
+            </h2>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
               {[
                 {
@@ -106,15 +121,17 @@ export default function AboutUs() {
               ].map((val, i) => (
                 <motion.div
                   key={val.title}
-                  className="bg-neutral-900 rounded-xl p-8 shadow hover:shadow-lg transition"
+                  className="bg-white border border-gray-200 rounded-xl p-8 shadow-sm hover:shadow-md transition"
                   initial={{ opacity: 0, y: 40 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.6, delay: 0.2 * (i + 1) }}
                   viewport={{ once: true }}
                   whileHover={{ scale: 1.05 }}
                 >
-                  <h3 className="text-lg font-bold mb-3">{val.title}</h3>
-                  <p className="text-gray-400">{val.desc}</p>
+                  <h3 className="text-lg font-bold mb-3 text-black">
+                    {val.title}
+                  </h3>
+                  <p className="text-gray-700">{val.desc}</p>
                 </motion.div>
               ))}
             </div>
@@ -128,23 +145,23 @@ export default function AboutUs() {
             transition={{ duration: 0.6, delay: 0.5 }}
             viewport={{ once: true }}
           >
-            <h2 className="text-2xl md:text-3xl font-bold mb-6">
+            <h2 className="text-2xl md:text-3xl font-bold mb-6 text-[#6438d6]">
               Join Us on This Journey
             </h2>
-            <p className="text-gray-400 max-w-2xl mx-auto mb-8">
+            <p className="text-gray-700 max-w-2xl mx-auto mb-8">
               Whether you’re here to find your next smartphone, laptop, or any
-              product in between — Evalyze is here to guide you every step of
-              the way.
+              product in between — Evalyze is here to guide you every step of the
+              way.
             </p>
             <motion.button
-              className="px-6 py-3 bg-black text-white rounded-lg font-medium hover:bg-neutral-800 transition"
+              className="px-6 py-3 bg-black text-white rounded-lg font-medium hover:bg-gray-800 transition"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.97 }}
             >
               Start Exploring
             </motion.button>
           </motion.section>
-        </PageWrapper>
+        </div>
       </div>
     </div>
   );

@@ -56,7 +56,7 @@ export default function SignupPage() {
       </div>
 
       {/* Actual 3D Image */}
-      <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 z-50 mt-40">
+      <div className="absolute left-7/15 top-1/2 -translate-x-1/2 -translate-y-1/2 z-10 flex items-center justify-center mt-40">
         <img
           src="/3d-art.jpg"
           alt="3D Art"

@@ -1,5 +1,21 @@
 @import "tailwindcss";
 
+/* globals.css */
+
+:root {
+  --font-heading: var(--font-archivo-black);
+  --font-body: var(--font-poppins);
+}
+
+body {
+  font-family: var(--font-poppins), sans-serif;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-archivo-black), sans-serif;
+}
+
+
 /* Global Dark Mode - OpenAI Style 
 html, body {
   @apply bg-black text-neutral-200;
