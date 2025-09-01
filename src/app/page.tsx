@@ -2,6 +2,7 @@
 import React from "react";
 import Nav1 from "@/app/components/Nav1";
 import Fot1 from "./components/Fot1";
+import { useRouter } from 'next/navigation';
 
 const categories = [
   { title: "AI", subtitle: "Tools", link: "https://images.unsplash.com/photo-1677442136019-21780ecad995?q=80&w=1632&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" },
@@ -12,6 +13,7 @@ const categories = [
 ];
 
 export default function EducationPage() {
+  const router = useRouter();
   return (
     <div className="bg-white">
     <div className="relative min-h-screen overflow-hidden flex flex-col">
@@ -45,9 +47,10 @@ export default function EducationPage() {
         <button
           className="rounded-xl bg-[#29b797] text-white font-bold"
           style={{ height: "62px", padding: "0 24px" }}
+          onClick={() => window.location.href = "/categories"}
         >
-            Explore now
-          </button>
+          Explore now
+        </button>
         </div>
       </main>
     </div>
@@ -73,32 +76,26 @@ export default function EducationPage() {
           {/* Category cards */}
           <div className="mt-12 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl w-full justify-center items-center">
             {categories.map((cat, idx) => (
-              <div
-                key={idx}
-                className="bg-white rounded-xl shadow flex flex-col justify-between border-2 border-transparent hover:border-[#6438d6] transition"
-              >
-                <div className="mb-2">
-                  {/* Image from the link */}
-                  <div className="h-36 w-full bg-gradient-to-b from-purple-100 to-purple-50 rounded-md mb-2 flex items-center justify-center">
-                    <img
-                      src={cat.link} // Use the link provided in the categories array
-                      alt={cat.title}
-                      className="object-cover w-full h-full rounded-xl"
-                    />
-                  </div>
-                  <h3 className="text-lg text-black font-semibold">{cat.title}</h3>
-                  <p className="text-[#6438d6] font-bold">{cat.subtitle}</p>
+            <div
+              key={idx}
+              onClick={() => router.push(`/categories?selected=${encodeURIComponent(cat.title)}`)}
+              className="cursor-pointer bg-white rounded-xl shadow flex flex-col justify-between border-2 border-transparent hover:border-[#6438d6] transition"
+            >
+              <div className="mb-2">
+                <div className="h-36 w-full bg-gradient-to-b from-purple-100 to-purple-50 rounded-md mb-2 flex items-center justify-center">
+                  <img
+                    src={cat.link}
+                    alt={cat.title}
+                    className="object-cover w-full h-full rounded-xl"
+                  />
                 </div>
-                <div className="flex justify-end">
-                  <button className="text-gray-500 hover:text-[#6438d6] font-bold">
-                  </button>
-                </div>
+                <h3 className="text-lg text-black font-semibold">{cat.title}</h3>
+                <p className="text-[#6438d6] font-bold">{cat.subtitle}</p>
               </div>
-            ))}
+            </div>
+          ))}
           </div>
-        </section>
-      </div>
-      <div>
+          </section>
         {/* Third Section: Knowledge Hub */}
         <section className="relative z-10 bg-gray-50 py-15 w-full flex flex-col items-center">
 
@@ -123,7 +120,10 @@ export default function EducationPage() {
                 </h3>
                 <div className="mt-4 flex items-center justify-between">
                   <p className="text-sm text-gray-500">November 9, 2024</p>
-                  <button className="px-4 py-2 rounded-xl border border-[#6438d6] text-black font-semibold hover:bg-[#f1f0fd] hover:text-black transition">
+                  <button
+                    className="px-4 py-2 rounded-xl border border-[#6438d6] text-black font-semibold hover:bg-[#f1f0fd] hover:text-black transition"
+                    onClick={() => router.push('/blog')}
+                  >
                     Read more
                   </button>
                 </div>
@@ -142,32 +142,38 @@ export default function EducationPage() {
                   Why is comparing necessary
                 </h3>
                 <div className="mt-4 flex items-center justify-between">
-                <p className="text-sm text-gray-500">October 31, 2024</p>
-                <button className="px-4 py-2 rounded-xl border border-[#6438d6] text-black font-semibold hover:bg-[#f1f0fd] hover:text-black transition">
-                  Read more
-                </button>
-              </div>
+                  <p className="text-sm text-gray-500">October 31, 2024</p>
+                  <button
+                    className="px-4 py-2 rounded-xl border border-[#6438d6] text-black font-semibold hover:bg-[#f1f0fd] hover:text-black transition"
+                    onClick={() => router.push('/blog')}
+                  >
+                    Read more
+                  </button>
+                </div>
               </div>
             </div>
 
             {/* Card 3 */}
             <div className="bg-white rounded-2xl p-6 shadow border-2 border-transparent hover:border-[#6438d6] transition-transform duration-300 ease-in-out transform hover:scale-105 hover:shadow-xl overflow-hidden">
-            <img
-              src="https://images.pexels.com/photos/8386440/pexels-photo-8386440.jpeg"
-              alt="Bull Pennant Patterns"
-              className="w-full h-32 object-cover rounded-xl"
-            />
-            <div className="p-6 text-left">
-              <h3 className="text-lg font-semibold text-gray-900 mt-1">
-                The Psychology of Decision-Making
-              </h3>
-              <div className="mt-4 flex items-center justify-between">
-                <p className="text-sm text-gray-500">August 14, 2024</p>
-                <button className="px-4 py-2 rounded-xl border border-[#6438d6] text-black font-semibold hover:bg-[#f1f0fd] hover:text-black transition">
-                  Read more
-                </button>
+              <img
+                src="https://images.pexels.com/photos/8386440/pexels-photo-8386440.jpeg"
+                alt="Bull Pennant Patterns"
+                className="w-full h-32 object-cover rounded-xl"
+              />
+              <div className="p-6 text-left">
+                <h3 className="text-lg font-semibold text-gray-900 mt-1">
+                  The Psychology of Decision-Making
+                </h3>
+                <div className="mt-4 flex items-center justify-between">
+                  <p className="text-sm text-gray-500">August 14, 2024</p>
+                  <button
+                    className="px-4 py-2 rounded-xl border border-[#6438d6] text-black font-semibold hover:bg-[#f1f0fd] hover:text-black transition"
+                    onClick={() => router.push('/blog')}
+                  >
+                    Read more
+                  </button>
+                </div>
               </div>
-            </div>
           </div>
           </div>
         </section>

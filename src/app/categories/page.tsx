@@ -2,12 +2,8 @@
 import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { Playfair_Display } from "next/font/google";
-
-const playfair = Playfair_Display({
-  subsets: ["latin"],
-  weight: ["500", "600", "700"],
-});
+import { useSearchParams } from "next/navigation";
+import { motion, AnimatePresence } from "framer-motion";
 
 type ComponentItem = {
   name: string;
@@ -40,49 +36,56 @@ const componentsList: ComponentItem[] = [
     site: "21st.dev",
     description: "Responsive pricing tables with tiers and call-to-action.",
     tags: ["Marketing", "UI"],
-    image: "https://images.unsplash.com/photo-1667539916754-968bd0977c12?q=80&w=687&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D", // placeholder
+    image:
+      "https://images.unsplash.com/photo-1667539916754-968bd0977c12?q=80&w=687&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D", // placeholder
   },
   {
     name: "Split Text",
-    site: "reactbits.dev" ,
+    site: "reactbits.dev",
     description: "Split's text in animated pattern.",
     tags: ["Animation", "UI"],
-    image: "https://images.unsplash.com/photo-1594844862885-f0a64d371deb?q=80&w=1471&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    image:
+      "https://images.unsplash.com/photo-1594844862885-f0a64d371deb?q=80&w=1471&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
   },
   {
     name: "Hero Section",
     site: "21st.dev",
     description: "Beautiful hero layouts with gradients and imagery.",
     tags: ["Landing Page", "Marketing"],
-    image: "https://images.unsplash.com/photo-1556707752-481d500a2c58?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    image:
+      "https://images.unsplash.com/photo-1556707752-481d500a2c58?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
   },
   {
     name: "Accordion",
     site: "21st.dev",
     description: "Accessible accordion component with smooth animations.",
     tags: ["UI", "Accordions"],
-    image: "https://images.unsplash.com/photo-1530950774950-6376cbdcf385?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    image:
+      "https://images.unsplash.com/photo-1530950774950-6376cbdcf385?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
   },
   {
     name: "Alert Banner",
     site: "reactbits.dev",
     description: "Dismissible alert banner for notifications and warnings.",
     tags: ["UI", "Alerts"],
-    image: "https://images.unsplash.com/photo-1692871152386-ce4343fc6260?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    image:
+      "https://images.unsplash.com/photo-1692871152386-ce4343fc6260?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
   },
   {
     name: "Button Variants",
     site: "reactbits.dev",
     description: "Different styled buttons with hover/active states.",
     tags: ["UI", "Buttons"],
-    image: "https://images.unsplash.com/flagged/photo-1578728890856-8bbf3883aa6d?q=80&w=714&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    image:
+      "https://images.unsplash.com/flagged/photo-1578728890856-8bbf3883aa6d?q=80&w=714&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
   },
   {
     name: "CTA Block",
     site: "21st.dev",
     description: "Call-to-action layouts for conversions.",
     tags: ["Marketing", "CTA"],
-    image: "https://images.unsplash.com/photo-1507238691740-187a5b1d37b8?q=80&w=755&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    image:
+      "https://images.unsplash.com/photo-1507238691740-187a5b1d37b8?q=80&w=755&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
   },
   {
     name: "Tabs",
@@ -103,7 +106,8 @@ const componentsList: ComponentItem[] = [
     site: "reactbits.dev",
     description: "Customizable dropdown menu with animations.",
     tags: ["UI", "Dropdowns"],
-    image: "https://cdn.vectorstock.com/i/1000x1000/23/63/dropdown-menu-website-element-vector-19402363.jpg",
+    image:
+      "https://cdn.vectorstock.com/i/1000x1000/23/63/dropdown-menu-website-element-vector-19402363.jpg",
   },
   {
     name: "Form Layouts",
@@ -117,57 +121,66 @@ const componentsList: ComponentItem[] = [
     site: "reactbits.dev",
     description: "Styled and validated input fields with states.",
     tags: ["UI", "Inputs"],
-    image: "https://images.pexels.com/photos/31466991/pexels-photo-31466991.jpeg",
+    image:
+      "https://images.pexels.com/photos/31466991/pexels-photo-31466991.jpeg",
   },
   {
     name: "Data Table",
     site: "21st.dev",
     description: "Responsive tables with sorting and filtering.",
     tags: ["UI", "Tables"],
-    image: "https://cdn.vectorstock.com/i/1000v/95/35/data-table-template-blue-yellow-vector-26829535.avif",
+    image:
+      "https://cdn.vectorstock.com/i/1000v/95/35/data-table-template-blue-yellow-vector-26829535.avif",
   },
   {
     name: "Carousel",
     site: "reactbits.dev",
     description: "Touch-enabled carousel slider component.",
     tags: ["UI", "Carousels"],
-    image: "https://cdn.vectorstock.com/i/1000v/79/14/smartphone-carousel-post-vector-24497914.avif",
+    image:
+      "https://cdn.vectorstock.com/i/1000v/79/14/smartphone-carousel-post-vector-24497914.avif",
   },
   {
     name: "Avatar",
     site: "reactbits.dev",
     description: "Circular avatar component with fallback initials.",
     tags: ["UI", "Avatars"],
-    image: "https://cdn.vectorstock.com/i/1000v/18/44/diverse-people-avatar-collection-vector-42791844.avif",
+    image:
+      "https://cdn.vectorstock.com/i/1000v/18/44/diverse-people-avatar-collection-vector-42791844.avif",
   },
   {
     name: "Badge",
     site: "reactbits.dev",
     description: "Compact badges for labeling and highlighting items.",
     tags: ["UI", "Badges"],
-    image: "https://images.unsplash.com/photo-1565828842574-d1f6923d9ec5?q=80&w=1174&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    image:
+      "https://images.unsplash.com/photo-1565828842574-d1f6923d9ec5?q=80&w=1174&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
   },
 ];
 
-
-
 export default function CategoriesPage() {
-  const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
+  const searchParams = useSearchParams();
+  const selectedFromURL = searchParams.get("selected");
 
-  // ✅ Filter components based on selected categories
-  const filteredComponents = selectedCategories.length === 0
-    ? componentsList
-    : componentsList.filter((item) =>
-        item.tags.some((tag) => selectedCategories.includes(tag))
-      );
+  const [selectedCategories, setSelectedCategories] = useState<string[]>(
+    selectedFromURL ? [selectedFromURL] : []
+  );
+  const [expandedCard, setExpandedCard] = useState<string | null>(null);
 
-  // ✅ Chunk into groups of 3 (was 2)
+  // Filter
+  const filteredComponents =
+    selectedCategories.length === 0
+      ? componentsList
+      : componentsList.filter((item) =>
+          item.tags.some((tag) => selectedCategories.includes(tag))
+        );
+
+  // Chunk into groups of 3
   const chunkedComponents: ComponentItem[][] = [];
   for (let i = 0; i < filteredComponents.length; i += 3) {
     chunkedComponents.push(filteredComponents.slice(i, i + 3));
   }
 
-  // ✅ Handle checkbox toggle
   const toggleCategory = (category: string) => {
     setSelectedCategories((prev) =>
       prev.includes(category)
@@ -180,9 +193,7 @@ export default function CategoriesPage() {
     <div>
       <header className="w-full px-10 py-6 bg-white shadow-sm border-b border-gray-200 cursor-pointer">
         <Link href="/">
-          <div className="text-2xl font-bold text-gray-900">
-            Evalyze
-          </div>
+          <div className="text-2xl font-bold text-gray-900">Evalyze</div>
         </Link>
       </header>
 
@@ -190,7 +201,9 @@ export default function CategoriesPage() {
         {/* Sidebar */}
         <aside className="w-74 top-40 h-fit self-start p-4">
           <div className="bg-white shadow border border-gray-200 rounded-3xl p-6">
-            <h2 className="text-lg font-semibold mb-4 text-gray-800">Filter Components</h2>
+            <h2 className="text-lg font-semibold mb-4 text-gray-800">
+              Filter Components
+            </h2>
             <SidebarCheckboxes
               selectedCategories={selectedCategories}
               toggleCategory={toggleCategory}
@@ -198,20 +211,45 @@ export default function CategoriesPage() {
           </div>
         </aside>
 
-        {/* Main content */}
-         <div className="flex-1">
-          <h1 className={`text-6xl font-bold text-gray-800 text-center pt-20 pb-10 ${playfair.className}`}>
+        {/* Main */}
+        <div className="flex-1">
+          <h1 className="text-6xl font-bold text-gray-800 text-center pt-20 pb-10">
             Categories
           </h1>
 
-          <main className="flex flex-col gap-8 px-10 pb-20 max-w-6xl mx-auto">
-            {chunkedComponents.length > 0 ? (
-              chunkedComponents.map((chunk, rowIndex) => (
-                  <Row key={rowIndex} chunk={chunk} />
-              ))
-            ) : (
-              <p className="text-center text-gray-500">No components match your filters.</p>
-            )}
+          <main className="flex flex-col gap-8 px-10 pb-20 max-w-6xl mx-auto relative">
+            <AnimatePresence mode="wait">
+              {expandedCard ? (
+                <motion.div
+                  key="expanded"
+                  layout
+                  initial={{ opacity: 0, scale: 0.9 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  exit={{ opacity: 0 }}
+                  transition={{ duration: 0.4 }}
+                  className="grid grid-cols-1"
+                >
+                  <ExpandedCard
+                    item={filteredComponents.find(
+                      (c) => c.name === expandedCard
+                    )!}
+                    onClose={() => setExpandedCard(null)}
+                  />
+                </motion.div>
+              ) : chunkedComponents.length > 0 ? (
+                chunkedComponents.map((chunk, rowIndex) => (
+                  <Row
+                    key={rowIndex}
+                    chunk={chunk}
+                    setExpandedCard={setExpandedCard}
+                  />
+                ))
+              ) : (
+                <p className="text-center text-gray-500">
+                  No components match your filters.
+                </p>
+              )}
+            </AnimatePresence>
           </main>
         </div>
       </div>
@@ -219,7 +257,7 @@ export default function CategoriesPage() {
   );
 }
 
-// ✅ Sidebar Checkbox List (with props)
+// Sidebar
 function SidebarCheckboxes({
   selectedCategories,
   toggleCategory,
@@ -247,39 +285,97 @@ function SidebarCheckboxes({
   );
 }
 
-function Row({ chunk }: { chunk: ComponentItem[] }) {
+// Row
+function Row({
+  chunk,
+  setExpandedCard,
+}: {
+  chunk: ComponentItem[];
+  setExpandedCard: (id: string) => void;
+}) {
   return (
     <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
       {chunk.map((item) => (
-        <Card key={item.name} item={item} />
+        <motion.div layout key={item.name}>
+          <Card item={item} onClick={() => setExpandedCard(item.name)} />
+        </motion.div>
       ))}
     </div>
   );
 }
 
-
-function Card({ item }: { item: ComponentItem }) {
+// Normal Card
+function Card({
+  item,
+  onClick,
+}: {
+  item: ComponentItem;
+  onClick: () => void;
+}) {
   return (
-    <div className="relative group rounded-3xl overflow-hidden border border-gray-200 shadow hover:shadow-lg transition-shadow duration-300">
+    <motion.div
+      layout
+      whileHover={{ scale: 1.02 }}
+      onClick={onClick}
+      className="relative group rounded-3xl overflow-hidden border border-gray-200 shadow hover:shadow-lg transition-shadow duration-300 cursor-pointer"
+    >
       <Image
         src={item.image}
         alt={item.name}
         width={500}
         height={300}
-        className="w-full h-64 object-cover transform transition-transform duration-300 group-hover:scale-105"
-
+        className="w-full h-64 object-cover"
       />
-
-      {/* Overlay on hover */}
-      <div className="absolute inset-0 bg-black/50 backdrop-blur-sm flex flex-col justify-center items-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 text-white p-6">
+      <div className="absolute inset-0 bg-black/40 backdrop-blur-sm flex flex-col justify-center items-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 text-white p-6">
         <h2 className="text-lg font-semibold mb-1 text-center">{item.name}</h2>
         <p className="text-sm italic text-gray-200 mb-1">{item.site}</p>
-        <p className="text-sm text-center text-gray-300 mb-4">{item.description}</p>
+        <p className="text-sm text-center text-gray-300 mb-4">
+          {item.description}
+        </p>
         <button className="px-4 py-2 rounded-lg bg-white text-black hover:bg-gray-200 text-sm">
           Explore →
         </button>
       </div>
-    </div>
+    </motion.div>
   );
 }
 
+// Expanded Card
+function ExpandedCard({
+  item,
+  onClose,
+}: {
+  item: ComponentItem;
+  onClose: () => void;
+}) {
+  return (
+    <motion.div
+      layout
+      className="rounded-3xl overflow-hidden border border-gray-300 shadow-lg relative"
+    >
+      <Image
+        src={item.image}
+        alt={item.name}
+        width={1200}
+        height={500}
+        className="w-full h-96 object-cover"
+      />
+      <div className="absolute top-4 right-4">
+        <button
+          onClick={onClose}
+          className="px-3 py-1 bg-black/70 text-white rounded-lg hover:bg-black"
+        >
+          ✕
+        </button>
+      </div>
+      <div className="p-8">
+        <h2 className="text-3xl font-bold mb-2">{item.name}</h2>
+        <p className="text-gray-600 italic mb-4">{item.site}</p>
+        <p className="text-gray-700 mb-6">{item.description}</p>
+        <button className="px-5 py-2 rounded-lg bg-black text-white hover:bg-gray-800">
+          Visit Site →
+        </button>
+      </div>
+    </motion.div>
+  );
+}
