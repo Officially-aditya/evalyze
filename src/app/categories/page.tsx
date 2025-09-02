@@ -4,6 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
+import { componentsList } from "../components/ComponentsList"
 
 type ComponentItem = {
   name: string;
@@ -28,134 +29,6 @@ const uiComponents = [
   "Forms",
   "Tables",
   "Carousels",
-];
-
-const componentsList: ComponentItem[] = [
-  {
-    name: "Pricing Table",
-    site: "21st.dev",
-    description: "Responsive pricing tables with tiers and call-to-action.",
-    tags: ["Marketing", "UI"],
-    image:
-      "https://images.unsplash.com/photo-1667539916754-968bd0977c12?q=80&w=687&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D", // placeholder
-  },
-  {
-    name: "Split Text",
-    site: "reactbits.dev",
-    description: "Split's text in animated pattern.",
-    tags: ["Animation", "UI"],
-    image:
-      "https://images.unsplash.com/photo-1594844862885-f0a64d371deb?q=80&w=1471&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-  },
-  {
-    name: "Hero Section",
-    site: "21st.dev",
-    description: "Beautiful hero layouts with gradients and imagery.",
-    tags: ["Landing Page", "Marketing"],
-    image:
-      "https://images.unsplash.com/photo-1556707752-481d500a2c58?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-  },
-  {
-    name: "Accordion",
-    site: "21st.dev",
-    description: "Accessible accordion component with smooth animations.",
-    tags: ["UI", "Accordions"],
-    image:
-      "https://images.unsplash.com/photo-1530950774950-6376cbdcf385?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-  },
-  {
-    name: "Alert Banner",
-    site: "reactbits.dev",
-    description: "Dismissible alert banner for notifications and warnings.",
-    tags: ["UI", "Alerts"],
-    image:
-      "https://images.unsplash.com/photo-1692871152386-ce4343fc6260?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-  },
-  {
-    name: "Button Variants",
-    site: "reactbits.dev",
-    description: "Different styled buttons with hover/active states.",
-    tags: ["UI", "Buttons"],
-    image:
-      "https://images.unsplash.com/flagged/photo-1578728890856-8bbf3883aa6d?q=80&w=714&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-  },
-  {
-    name: "CTA Block",
-    site: "21st.dev",
-    description: "Call-to-action layouts for conversions.",
-    tags: ["Marketing", "CTA"],
-    image:
-      "https://images.unsplash.com/photo-1507238691740-187a5b1d37b8?q=80&w=755&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-  },
-  {
-    name: "Tabs",
-    site: "reactbits.dev",
-    description: "Keyboard-accessible tab components with smooth transitions.",
-    tags: ["UI", "Tabs"],
-    image: "https://images.pexels.com/photos/6193327/pexels-photo-6193327.jpeg",
-  },
-  {
-    name: "Modal",
-    site: "reactbits.dev",
-    description: "Accessible modal dialog with backdrop and focus trap.",
-    tags: ["UI", "Modals"],
-    image: "https://images.pexels.com/photos/29766159/pexels-photo-29766159.jpeg",
-  },
-  {
-    name: "Dropdown",
-    site: "reactbits.dev",
-    description: "Customizable dropdown menu with animations.",
-    tags: ["UI", "Dropdowns"],
-    image:
-      "https://cdn.vectorstock.com/i/1000x1000/23/63/dropdown-menu-website-element-vector-19402363.jpg",
-  },
-  {
-    name: "Form Layouts",
-    site: "21st.dev",
-    description: "Ready-to-use form layouts for signups and logins.",
-    tags: ["UI", "Forms"],
-    image: "https://images.pexels.com/photos/955392/pexels-photo-955392.jpeg",
-  },
-  {
-    name: "Input Fields",
-    site: "reactbits.dev",
-    description: "Styled and validated input fields with states.",
-    tags: ["UI", "Inputs"],
-    image:
-      "https://images.pexels.com/photos/31466991/pexels-photo-31466991.jpeg",
-  },
-  {
-    name: "Data Table",
-    site: "21st.dev",
-    description: "Responsive tables with sorting and filtering.",
-    tags: ["UI", "Tables"],
-    image:
-      "https://cdn.vectorstock.com/i/1000v/95/35/data-table-template-blue-yellow-vector-26829535.avif",
-  },
-  {
-    name: "Carousel",
-    site: "reactbits.dev",
-    description: "Touch-enabled carousel slider component.",
-    tags: ["UI", "Carousels"],
-    image:
-      "https://cdn.vectorstock.com/i/1000v/79/14/smartphone-carousel-post-vector-24497914.avif",
-  },
-  {
-    name: "Avatar",
-    site: "reactbits.dev",
-    description: "Circular avatar component with fallback initials.",
-    tags: ["UI", "Avatars"],
-    image:
-      "https://cdn.vectorstock.com/i/1000v/18/44/diverse-people-avatar-collection-vector-42791844.avif",
-  },
-  {
-    name: "Badge",
-    site: "reactbits.dev",
-    description: "Compact badges for labeling and highlighting items.",
-    tags: ["UI", "Badges"],
-    image:
-      "https://images.unsplash.com/photo-1565828842574-d1f6923d9ec5?q=80&w=1174&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-  },
 ];
 
 export default function CategoriesPage() {
@@ -328,7 +201,6 @@ function Card({
       />
       <div className="absolute inset-0 bg-black/40 backdrop-blur-sm flex flex-col justify-center items-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 text-white p-6">
         <h2 className="text-lg font-semibold mb-1 text-center">{item.name}</h2>
-        <p className="text-sm italic text-gray-200 mb-1">{item.site}</p>
         <p className="text-sm text-center text-gray-300 mb-4">
           {item.description}
         </p>
