@@ -4,15 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
-import { componentsList } from "../components/ComponentsList"
-
-type ComponentItem = {
-  name: string;
-  site: string;
-  description: string;
-  tags: string[];
-  image: string;
-};
+import { componentsList, ComponentItem, ComponentFile } from "../components/ComponentsList";
 
 const uiComponents = [
   "Accordions",
@@ -40,7 +32,7 @@ export default function CategoriesPage() {
   );
   const [expandedCard, setExpandedCard] = useState<string | null>(null);
 
-  // Filter
+  // Filter components
   const filteredComponents =
     selectedCategories.length === 0
       ? componentsList
@@ -212,7 +204,7 @@ function Card({
   );
 }
 
-// Expanded Card
+// Expanded Card with code tabs
 function ExpandedCard({
   item,
   onClose,
@@ -220,11 +212,11 @@ function ExpandedCard({
   item: ComponentItem;
   onClose: () => void;
 }) {
+  const [activeFileIndex, setActiveFileIndex] = useState(0);
+
   return (
-    <motion.div
-      layout
-      className="rounded-3xl overflow-hidden border border-gray-300 shadow-lg relative"
-    >
+    <div className="rounded-3xl overflow-hidden border border-gray-300 shadow-lg relative bg-white">
+      {/* Image */}
       <Image
         src={item.image}
         alt={item.name}
@@ -232,6 +224,7 @@ function ExpandedCard({
         height={500}
         className="w-full h-96 object-cover"
       />
+      {/* Close button */}
       <div className="absolute top-4 right-4">
         <button
           onClick={onClose}
@@ -240,14 +233,43 @@ function ExpandedCard({
           ✕
         </button>
       </div>
+
+      {/* Info */}
       <div className="p-8">
         <h2 className="text-3xl font-bold mb-2">{item.name}</h2>
         <p className="text-gray-600 italic mb-4">{item.site}</p>
         <p className="text-gray-700 mb-6">{item.description}</p>
-        <button className="px-5 py-2 rounded-lg bg-black text-white hover:bg-gray-800">
+        <button className="px-5 py-2 rounded-lg bg-black text-white hover:bg-gray-800 mb-6">
           Visit Site →
         </button>
+
+        {/* Code files */}
+        {item.files && item.files.length > 0 && (
+          <div className="mt-6">
+            {/* File tabs */}
+            <div className="flex space-x-2 mb-4 overflow-x-auto">
+              {item.files.map((file: ComponentFile, idx: number) => (
+                <button
+                  key={file.fileName}
+                  onClick={() => setActiveFileIndex(idx)}
+                  className={`px-4 py-2 rounded-t-lg border-b-2 ${
+                    idx === activeFileIndex
+                      ? "border-blue-500 text-blue-600 font-semibold"
+                      : "border-transparent text-gray-500 hover:text-gray-700"
+                  }`}
+                >
+                  {file.fileName}
+                </button>
+              ))}
+            </div>
+
+            {/* Code panel */}
+            <pre className="bg-gray-100 p-4 rounded-lg overflow-x-auto text-sm">
+              <code>{item.files[activeFileIndex].code}</code>
+            </pre>
+          </div>
+        )}
       </div>
-    </motion.div>
+    </div>
   );
 }
