@@ -237,7 +237,6 @@ function ExpandedCard({
       {/* Info */}
       <div className="p-8">
         <h2 className="text-3xl font-bold mb-2">{item.name}</h2>
-        <p className="text-gray-600 italic mb-4">{item.site}</p>
         <p className="text-gray-700 mb-6">{item.description}</p>
         <button className="px-5 py-2 rounded-lg bg-black text-white hover:bg-gray-800 mb-6">
           Visit Site →
