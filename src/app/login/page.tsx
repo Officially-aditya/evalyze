@@ -24,7 +24,9 @@ export default function LoginPage() {
       const result = await res.json();
       if (res.ok) {
         setMessage("✅ Logged in successfully!");
-        router.push("/"); // redirect to homepage
+        localStorage.setItem("token", result.token);
+        localStorage.setItem("user", JSON.stringify(result.user));
+        window.location.href = "/";
       } else {
         setMessage(`❌ ${result.error}`);
       }
