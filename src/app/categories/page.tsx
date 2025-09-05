@@ -213,6 +213,18 @@ function ExpandedCard({
   onClose: () => void;
 }) {
   const [activeFileIndex, setActiveFileIndex] = useState(0);
+      const [copied, setCopied] = useState(false);
+    const command = "npx shadcn@latest";
+
+    const handleCopy = async () => {
+      try {
+        await navigator.clipboard.writeText(command);
+        setCopied(true);
+        setTimeout(() => setCopied(false), 2000); // reset after 2 sec
+      } catch (err) {
+        console.error("Failed to copy:", err);
+      }
+    };
 
   return (
     <div className="rounded-3xl overflow-hidden border border-gray-300 shadow-lg relative bg-white">
@@ -238,8 +250,11 @@ function ExpandedCard({
       <div className="p-8">
         <h2 className="text-3xl font-bold mb-2">{item.name}</h2>
         <p className="text-gray-700 mb-6">{item.description}</p>
-        <button className="px-5 py-2 rounded-lg bg-black text-white hover:bg-gray-800 mb-6">
-          Visit Site →
+        <button
+          onClick={handleCopy}
+          className="px-5 py-2 rounded-lg bg-black text-white hover:bg-gray-800 mb-6 relative"
+        >
+          {copied ? "Copied!" : "npx shadcn@latest"}
         </button>
 
         {/* Code files */}
